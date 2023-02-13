@@ -1,11 +1,11 @@
 import React from "react";
-import "./style.css";
+import {Button} from 'reactstrap';
+import "./styles/style.scss";
 
 export default function App() {
   return (
     <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
+     <Button className="btn primary__btn">Hello</Button>
     </div>
   );
 }
