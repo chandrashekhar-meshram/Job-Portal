@@ -1,0 +1,27 @@
+{
+  "name": "react",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@types/react": ">=16.14.8",
+    "babel-runtime": "^5.3.3",
+    "jquery": ">=1.8.0",
+    "react": "^18.1.0",
+    "react-bootstrap": "^2.7.1",
+    "react-dom": "^18.1.0",
+    "react-icon": "^1.0.0",
+    "reactstrap": "^9.1.5",
+    "remixicon": "^2.5.0",
+    "slick-carousel": "^1.8.1",
+    "svgo": "^3.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "latest"
+  }
+}
