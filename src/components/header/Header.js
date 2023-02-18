@@ -1,69 +1,59 @@
-import React from 'react';
-import {Container, Row, Button} from 'reactstrap';
-import {NavLink, Link} from 'react-router-dom';
-import './Header.scss';
-import {Logo} from "../../assets/images/Logo";
+import React, { useRef, useEffect } from "react";
+import logo from "../../assets/images/logo.png";
+import classes from "./Header.module.scss";
+import { Link, NavLink } from "react-router-dom";
+const navLinks = [
+  {
+    path: "/jobs",
+    display: "Search Job",
+  },
+  {
+    path: "/internship",
+    display: "Internship",
+  },
+  {
+    path: "/employer",
+    display: "Post a job",
+  },
+];
 
-const nav_links = [
-  {
-    path: '/home',
-    display: 'Home'
-  },
-  {
-    path: '/jobs',
-    display: 'Jobs'
-  },
-  {
-    path: '/login',
-    display: 'Login'
-  },
-  {
-    path: '/register',
-    display: 'Register'
-  }
-]
-
-const Header = ()=> {
+const Header = () => {
+  const headerRef = useRef(null);
+  useEffect(() => {
+    stickyHeaderFunc();
+    return window.removeEventListener("scroll", stickyHeaderFunc);
+  }, []);
+  const stickyHeaderFunc = () => {
+    window.addEventListener("scroll", () => {
+      console.log("Scroll");
+      if (document.body.scrollTop > 80) {
+        headerRef.current.classList.add(`{classes.sticky__header}`);
+      } else {
+        headerRef.current.classList.remove("sticky__header");
+      }
+    });
+  };
 
   return (
-    <header className='header'>
-      <Container>
-        <Row>
-          <div className='nav_wrapper d-flex align-items-center justify-containt'>
-            <img src={Logo} alt='logo'/>
-          </div>
-          <div className='navigation'>
-            <ul className='menu d-flex align-items-center gap-5'>
-              {nav_links.map((item, index) => {
-                <li className='nav__item'>
-                  <NavLink
-                  to={item.path}
-                  className={(navclass) => 
-                    navclass.isActive ? "active__link" : ""
-                  }
-                  >
-                    {item.display}
-                  </NavLink>
-                </li>;
-              })
-              }
-            </ul>
-          </div>
-          <div className="nav__right d-flex align-items-center gap-4">
-              <div className="nav__btns">
-                <Button className="btn primary__btn">
-                  <Link to="/login">Login</Link>
-                </Button>
-                <Button className="btn primary__btn">
-                  <Link to="/register">Register</Link>
-                </Button>
-              </div>
-          </div>
-        </Row>
-      </Container>
-      
+    <header className={classes.header} ref={headerRef}>
+      <div className={classes.container}>
+        <div className={classes.logo}>
+          <Link to={"/"}>
+            <img src={logo} alt="Logo" />
+          </Link>
+        </div>
+        <div className={classes.right_menu}>
+          <ul className={classes.menuList}>
+            {navLinks.map((item, index) => (
+              <li key={index}>
+                <NavLink to={item.path}>{item.display}</NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </header>
-  )
-}
+  );
+};
 
 export default Header;
